@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Cita {
     @Id
     @Column(name = "idCita")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //@ManyToOne()
@@ -47,8 +47,7 @@ public class Cita {
     @Column(name = "fechaActualizacion")
     private LocalDateTime fechaActualizacion;
 
-    public Cita(Long idUsuario, Long idMedico, Long idEps, Long idEstado, LocalDateTime fechaHora, String numeroAutorizacion, String observaciones, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
-        this.idUsuario = idUsuario;
+    public Cita(Long idMedico, Long idEps, Long idEstado, LocalDateTime fechaHora, String numeroAutorizacion, String observaciones, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
         this.idMedico = idMedico;
         this.idEps = idEps;
         this.idEstado = idEstado;

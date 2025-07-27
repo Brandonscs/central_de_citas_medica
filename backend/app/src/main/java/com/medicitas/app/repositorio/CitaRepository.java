@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CitaRepository extends JpaRepository<Cita, Long> {
@@ -25,7 +26,7 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
             ORDER BY fecha_hora DESC
             LIMIT 1
             """, nativeQuery = true)
-    Cita buscarUltimaCitaPorUsuario(Long idUsuario);
+    Optional<Cita> buscarUltimaCitaPorUsuario(Long idUsuario);
 
     @Query(value = """
             SELECT * FROM cita
@@ -36,10 +37,10 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
 
     @Query(value = """
             SELECT * FROM cita
-            WHERE id_estado = :estado
+            WHERE id_estado = :idEstado
             ORDER BY fecha_hora DESC
             """, nativeQuery = true)
-    List<Cita> buscarCitasPorEstado(String estado);
+    List<Cita> buscarCitasPorEstado(Long idEstado);
 
     @Query(value = """
             SELECT * FROM cita
