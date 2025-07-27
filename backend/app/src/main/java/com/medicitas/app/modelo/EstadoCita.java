@@ -1,11 +1,10 @@
 package com.medicitas.app.modelo;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Columns;
 
 @Entity
 @Table(name = "estadoCita")
-public class Estado {
+public class EstadoCita {
     @Id
     @Column(name = "idEstado")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +19,10 @@ public class Estado {
     @Column(name = "activo")
     private Boolean activo;
 
-    public Estado() {
+    public EstadoCita() {
     }
 
-    public Estado(String nombre, String descripcion, Boolean activo) {
+    public EstadoCita(String nombre, String descripcion, Boolean activo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.activo = activo;
