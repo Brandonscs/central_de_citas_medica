@@ -16,16 +16,12 @@ public class EstadoCita {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "activo")
-    private Boolean activo;
-
     public EstadoCita() {
     }
 
-    public EstadoCita(String nombre, String descripcion, Boolean activo) {
+    public EstadoCita(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.activo = activo;
     }
 
     public Long getId() {
@@ -50,13 +46,5 @@ public class EstadoCita {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
     }
 }
