@@ -59,7 +59,7 @@ public class CitaController {
 
         List<Cita> listaCitas = this.citaRepository.buscarCitasPorFecha(fecha);
 
-        
+
         return listaCitas;
     }
 }
