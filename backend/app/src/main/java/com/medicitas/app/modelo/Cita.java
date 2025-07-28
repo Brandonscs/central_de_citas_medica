@@ -13,10 +13,9 @@ public class Cita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@ManyToOne()
-    //@JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-    @Column(name = "idUsuario")
-    private Long idUsuario;
+    @ManyToOne()
+    @JoinColumn(name = "idUsuario", referencedColumnName = "id")
+    private Usuario idUsuario;
 
     //@ManyToOne()
     //@JoinColumn(name = "idMedico", referencedColumnName = "idMedico")
@@ -47,7 +46,8 @@ public class Cita {
     @Column(name = "fechaActualizacion")
     private LocalDateTime fechaActualizacion;
 
-    public Cita(Long idMedico, Long idEps, EstadoCita idEstado, LocalDateTime fechaHora, String numeroAutorizacion, String observaciones, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
+    public Cita(Usuario idUsuario, Long idMedico, Long idEps, EstadoCita idEstado, LocalDateTime fechaHora, String numeroAutorizacion, String observaciones, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
+        this.idUsuario = idUsuario;
         this.idMedico = idMedico;
         this.idEps = idEps;
         this.idEstado = idEstado;
@@ -69,11 +69,11 @@ public class Cita {
         this.id = id;
     }
 
-    public Long getIdUsuario() {
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
 

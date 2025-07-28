@@ -2,8 +2,10 @@ package com.medicitas.app.controlador;
 
 import com.medicitas.app.modelo.Cita;
 import com.medicitas.app.modelo.EstadoCita;
+import com.medicitas.app.modelo.Usuario;
 import com.medicitas.app.repositorio.CitaRepository;
 import com.medicitas.app.repositorio.EstadoCitaRepository;
+import com.medicitas.app.repositorio.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,9 @@ public class CitaController {
 
     @Autowired
     private EstadoCitaRepository estadoCitaRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("/obtenerTodasLasCitas")
     public List<Cita> obtenerTodasLasCitas() {
@@ -48,12 +53,16 @@ public class CitaController {
     public Optional<Cita> crearCita(@RequestBody Cita citaP) {
 
         Optional<EstadoCita> estadoCitaOp = this.estadoCitaRepository.findById(citaP.getIdEstado().getId());
+        Optional<Usuario> usuarioOp = this.usuarioRepository.findById(citaP.getIdUsuario().getId());
 
-        if (estadoCitaOp.isPresent()) {
+        if (estadoCitaOp.isPresent() && usuarioOp.isPresent()) {
 
             EstadoCita estadoCita = estadoCitaOp.get();
 
+            Usuario usuario = usuarioOp.get();
+
             citaP.setIdEstado(estadoCita);
+            citaP.setIdUsuario(usuario);
         }
 
         Optional<Cita> cita = Optional.of(this.citaRepository.save(citaP));
