@@ -29,7 +29,7 @@ public class EstadoCitaController {
 
         Optional<EstadoCita> estadoCita = this.estadoCitaRepository.findById(idEstado);
 
-        if (estadoCita != null) {
+        if (estadoCita.isPresent()) {
             return estadoCita;
         } else {
             return Optional.empty();
@@ -41,7 +41,12 @@ public class EstadoCitaController {
 
         Optional<EstadoCita> estadoCita = Optional.of(this.estadoCitaRepository.save(estado));
 
-        return estadoCita;
+        if (estadoCita.isPresent()) {
+            return estadoCita;
+        } else {
+            return Optional.empty();
+        }
+
     }
 
     @PutMapping("/actualizar")

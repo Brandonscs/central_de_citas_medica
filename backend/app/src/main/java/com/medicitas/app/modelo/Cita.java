@@ -3,6 +3,7 @@ package com.medicitas.app.modelo;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Table(name = "cita")
@@ -27,10 +28,9 @@ public class Cita {
     @Column(name = "idEps")
     private Long idEps;
 
-    //@ManyToOne()
-    //@JoinColumn(name = "idEstado", referencedColumnName = "idEstado")
-    @Column(name = "idEstado")
-    private Long idEstado;
+    @ManyToOne()
+    @JoinColumn(name = "idEstado", referencedColumnName = "idEstado")
+    private EstadoCita idEstado;
 
     @Column(name = "fechaHora")
     private LocalDateTime fechaHora;
@@ -47,7 +47,7 @@ public class Cita {
     @Column(name = "fechaActualizacion")
     private LocalDateTime fechaActualizacion;
 
-    public Cita(Long idMedico, Long idEps, Long idEstado, LocalDateTime fechaHora, String numeroAutorizacion, String observaciones, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
+    public Cita(Long idMedico, Long idEps, EstadoCita idEstado, LocalDateTime fechaHora, String numeroAutorizacion, String observaciones, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
         this.idMedico = idMedico;
         this.idEps = idEps;
         this.idEstado = idEstado;
@@ -93,11 +93,11 @@ public class Cita {
         this.idEps = idEps;
     }
 
-    public Long getIdEstado() {
+    public EstadoCita getIdEstado() {
         return idEstado;
     }
 
-    public void setIdEstado(Long idEstado) {
+    public void setIdEstado(EstadoCita idEstado) {
         this.idEstado = idEstado;
     }
 
