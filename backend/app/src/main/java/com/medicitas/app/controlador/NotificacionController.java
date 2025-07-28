@@ -2,8 +2,10 @@ package com.medicitas.app.controlador;
 
 import com.medicitas.app.modelo.Cita;
 import com.medicitas.app.modelo.Notificacion;
+import com.medicitas.app.modelo.Usuario;
 import com.medicitas.app.repositorio.CitaRepository;
 import com.medicitas.app.repositorio.NotificacionRepository;
+import com.medicitas.app.repositorio.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,9 @@ public class NotificacionController {
 
     @Autowired
     private CitaRepository citaRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("/obtenerTodasLasNotificaciones")
     public List<Notificacion> obtenerTodasLasNotificaciones() {
@@ -45,12 +50,15 @@ public class NotificacionController {
     public Optional<Notificacion> crearNotificacion(@RequestBody Notificacion notificacionP) {
 
         Optional<Cita> citaOp = this.citaRepository.findById(notificacionP.getIdCita().getId());
+        Optional<Usuario> usuarioOp = this.usuarioRepository.findById(notificacionP.getIdUsuario().getId());
 
-        if (citaOp.isPresent()) {
+        if (citaOp.isPresent() && usuarioOp.isPresent()) {
 
             Cita cita = citaOp.get();
+            Usuario usuario = usuarioOp.get();
 
             notificacionP.setIdCita(cita);
+            notificacionP.setIdUsuario(usuario);
         }
 
         Optional<Notificacion> notificacion = Optional.of(this.notificacionRepository.save(notificacionP));

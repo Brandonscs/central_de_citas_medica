@@ -12,8 +12,9 @@ public class Notificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNotificacion;
 
-    @Column(name = "idUsuario")
-    private Long idUsuario;
+    @ManyToOne()
+    @JoinColumn(name = "idUsuario", referencedColumnName = "id")
+    private Usuario idUsuario;
 
     @ManyToOne()
     @JoinColumn(name = "idCita", referencedColumnName = "idCita")
@@ -34,7 +35,7 @@ public class Notificacion {
     public Notificacion() {
     }
 
-    public Notificacion(Long idUsuario, Cita idCita, String tipo, String asunto, String mensaje, LocalDateTime fechaEnvio) {
+    public Notificacion(Usuario idUsuario, Cita idCita, String tipo, String asunto, String mensaje, LocalDateTime fechaEnvio) {
         this.idUsuario = idUsuario;
         this.idCita = idCita;
         this.tipo = tipo;
@@ -51,11 +52,11 @@ public class Notificacion {
         this.idNotificacion = idNotificacion;
     }
 
-    public Long getIdUsuario() {
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
 
