@@ -106,7 +106,7 @@ public class CitaController {
     public List<Cita> buscarCitasPorFecha(@RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime fecha) {
 
         List<Cita> listaCitas = this.citaRepository.buscarCitasPorFecha(fecha);
-        
+
         return listaCitas;
     }
 }
