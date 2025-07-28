@@ -3,6 +3,7 @@ package com.medicitas.app.repositorio;
 import com.medicitas.app.modelo.Cita;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -18,7 +19,7 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
             AND id_estado = 1
             ORDER BY fecha_hora DESC
             """, nativeQuery = true)
-    List<Cita> buscarCitasPendientesPorUsuario(Long idUsuario);
+    List<Cita> buscarCitasPendientesPorUsuario(@Param("idUsuario") Long idUsuario);
 
     @Query(value = """
             SELECT * FROM cita
@@ -26,26 +27,26 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
             ORDER BY fecha_hora DESC
             LIMIT 1
             """, nativeQuery = true)
-    Optional<Cita> buscarUltimaCitaPorUsuario(Long idUsuario);
+    Optional<Cita> buscarUltimaCitaPorUsuario(@Param("idUsuario") Long idUsuario);
 
     @Query(value = """
             SELECT * FROM cita
             WHERE id_medico = :idMedico
             ORDER BY fecha_hora DESC
             """, nativeQuery = true)
-    List<Cita> buscarCitasPorMedico(Long idMedico);
+    List<Cita> buscarCitasPorMedico(@Param("idMedico") Long idMedico);
 
     @Query(value = """
             SELECT * FROM cita
             WHERE id_estado = :idEstado
             ORDER BY fecha_hora DESC
             """, nativeQuery = true)
-    List<Cita> buscarCitasPorEstado(Long idEstado);
+    List<Cita> buscarCitasPorEstado(@Param("idEstado") Long idEstado);
 
     @Query(value = """
             SELECT * FROM cita
             WHERE fecha_hora = :fecha
             ORDER BY fecha_hora DESC
             """, nativeQuery = true)
-    List<Cita> buscarCitasPorFecha(LocalDateTime fecha);
+    List<Cita> buscarCitasPorFecha(@Param("fecha") LocalDateTime fecha);
 }
