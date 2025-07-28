@@ -15,8 +15,9 @@ public class Notificacion {
     @Column(name = "idUsuario")
     private Long idUsuario;
 
-    @Column(name = "idCita")
-    private Long idCita;
+    @ManyToOne()
+    @JoinColumn(name = "idCita", referencedColumnName = "idCita")
+    private Cita idCita;
 
     @Column(name = "tipo")
     private String tipo;
@@ -33,7 +34,7 @@ public class Notificacion {
     public Notificacion() {
     }
 
-    public Notificacion(Long idUsuario, Long idCita, String tipo, String asunto, String mensaje, LocalDateTime fechaEnvio) {
+    public Notificacion(Long idUsuario, Cita idCita, String tipo, String asunto, String mensaje, LocalDateTime fechaEnvio) {
         this.idUsuario = idUsuario;
         this.idCita = idCita;
         this.tipo = tipo;
@@ -58,11 +59,11 @@ public class Notificacion {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdCita() {
+    public Cita getIdCita() {
         return idCita;
     }
 
-    public void setIdCita(Long idCita) {
+    public void setIdCita(Cita idCita) {
         this.idCita = idCita;
     }
 
