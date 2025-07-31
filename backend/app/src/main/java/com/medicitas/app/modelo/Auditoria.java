@@ -144,7 +144,4 @@ public class Auditoria {
 	public void setDatosNuevos(String datosNuevos) {
 		this.datosNuevos = datosNuevos;
 	}
-    
-    
-
 }
