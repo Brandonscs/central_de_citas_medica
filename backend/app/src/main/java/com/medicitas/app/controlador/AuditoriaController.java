@@ -85,4 +85,6 @@ public class AuditoriaController {
 
         return auditoriaRepository.buscarAuditoriaPorRangoFecha(fechaInicio, fechaFin);
     }
+    
+    
 }
