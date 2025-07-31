@@ -26,3 +26,4 @@ public interface AuditoriaRepository extends JpaRepository<Auditoria, Long> {
     @Query("SELECT a FROM Auditoria a WHERE a.fechaAccion BETWEEN :inicio AND :fin")
     List<Auditoria> buscarAuditoriaPorRangoFecha(@Param("inicio") Date inicio, @Param("fin") Date fin);
 }
+
