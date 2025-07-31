@@ -110,4 +110,5 @@ public class RolUsuario {
 		this.asignadoPor = asignadoPor;
 	}
 
+	
 }
