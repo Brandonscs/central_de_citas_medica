@@ -2,11 +2,17 @@ package com.medicitas.app.modelo;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -14,42 +20,47 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name = "rol_usuario")
 public class RolUsuario {
-	
-	@Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_usuario", nullable = false)
-    private Long idUsuario;
+    @ManyToOne
+    @JsonBackReference("usuario-rol")
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
-    @Column(name = "id_rol", nullable = false)
-    private Long idRol;
+    @ManyToOne
+    @JsonBackReference("rol-rolUsuario")
+    @JoinColumn(name = "id_rol", nullable = false)
+    private Rol rol;
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "fecha_asignacion")
+    @Column(name = "fecha_asignacion", updatable = false)
     private Date fechaAsignacion;
 
     @Column(nullable = false)
     private boolean activo;
 
-    @Column(name = "asignado_por")
-    private Long asignadoPor;
+    @ManyToOne
+    @JsonBackReference("asignador-rol")
+    @JoinColumn(name = "asignado_por")
+    private Usuario asignadoPor;
+    
 
-	public RolUsuario() {
-		super();
-		// TODO Auto-generated constructor stub
-		this.fechaAsignacion = new Date();
+    public RolUsuario() {
+        this.fechaAsignacion = new Date();
         this.activo = true;
-	}
+    }
 
-	public RolUsuario(Long idUsuario, Long idRol, Date fechaAsignacion, boolean activo, Long asignadoPor) {
-		super();
-		this.idUsuario = idUsuario;
-		this.idRol = idRol;
-		this.fechaAsignacion = fechaAsignacion != null ? fechaAsignacion : new Date();
-		this.activo = activo;
-		this.asignadoPor = asignadoPor;
-	}
+    public RolUsuario(Usuario usuario, Rol rol, Date fechaAsignacion, boolean activo, Usuario asignadoPor) {
+        this.usuario = usuario;
+        this.rol = rol;
+        this.fechaAsignacion = fechaAsignacion != null ? fechaAsignacion : new Date();
+        this.activo = activo;
+        this.asignadoPor = asignadoPor;
+    }
 
 	public Long getId() {
 		return id;
@@ -59,20 +70,20 @@ public class RolUsuario {
 		this.id = id;
 	}
 
-	public Long getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public Long getIdRol() {
-		return idRol;
+	public Rol getRol() {
+		return rol;
 	}
 
-	public void setIdRol(Long idRol) {
-		this.idRol = idRol;
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 	public Date getFechaAsignacion() {
@@ -91,14 +102,12 @@ public class RolUsuario {
 		this.activo = activo;
 	}
 
-	public Long getAsignadoPor() {
+	public Usuario getAsignadoPor() {
 		return asignadoPor;
 	}
 
-	public void setAsignadoPor(Long asignadoPor) {
+	public void setAsignadoPor(Usuario asignadoPor) {
 		this.asignadoPor = asignadoPor;
 	}
-    
-	
-    
+
 }
