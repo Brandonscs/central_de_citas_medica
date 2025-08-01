@@ -1,0 +1,38 @@
+<app-nav></app-nav>
+
+<h2 style="text-align: center;">Mis Citas Médicas</h2>
+
+<table class="tabla-citas">
+  <thead>
+    <tr>
+      <th>Médico</th>
+      <th>Fecha</th>
+      <th>N° Autorización</th>
+      <th>Fecha Creación</th>
+      <th>Fecha Actualización</th>
+      <th>Estado</th>
+      <th>Observaciones</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cita of citas; let i = index">
+      <td>{{ cita.medico }}</td>
+      <td>{{ cita.fecha }}</td>
+      <td>{{ cita.numeroAutorizacion }}</td>
+      <td>{{ cita.fechaCreacion }}</td>
+      <td>{{ cita.fechaActualizacion }}</td>
+      <td>{{ cita.estado }}</td>
+      <td>{{ cita.observaciones }}</td>
+      <td>
+        <button 
+          *ngIf="cita.estado === 'Pendiente'" 
+          (click)="cancelarCita(i)" 
+          class="boton-cancelar">
+          Cancelar
+        </button>
+        <span *ngIf="cita.estado !== 'Pendiente'">No aplica</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
