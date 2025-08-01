@@ -9,10 +9,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-
+import com.medicitas.app.modelo.EPS;
 import com.medicitas.app.modelo.Especialidad;
 import com.medicitas.app.modelo.Usuario;
 import com.medicitas.app.repositorio.especialidadRepositorio;
+import com.medicitas.app.repositorio.EpsRepository;
 import com.medicitas.app.repositorio.UsuarioRepository;
 
 @RestController
@@ -27,6 +28,11 @@ public class MedicoController {
     
     @Autowired
     private UsuarioRepository usuarioRepositorio;
+    
+    @Autowired
+    private EpsRepository epsRepositorio;
+    
+    
 
     @GetMapping
     public List<Medico> obtenerTodosLosMedicos() {
@@ -34,7 +40,7 @@ public class MedicoController {
     }
 
     @GetMapping("/obtenerMedicoPorId")
-    public ResponseEntity<Medico> obtenerMedicoPorId(@RequestParam Long id) {
+    public ResponseEntity<Medico> obtenerMedicoPorId(@RequestParam("id") Long id) {
         Optional<Medico> medico = medicoRepository.findById(id);
         return medico.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -54,7 +60,7 @@ public class MedicoController {
         if (medicoRequest.getEps() == null || medicoRequest.getEps().getId() == null) {
             return ResponseEntity.badRequest().body("El ID de EPS es requerido");
         }
-        Optional<EPS> epsOp = epsRepository.findById(medicoRequest.getEps().getId());
+        Optional<EPS> epsOp = epsRepositorio.findById(medicoRequest.getEps().getId());
         if (!epsOp.isPresent()) {
             return ResponseEntity.badRequest().body("EPS no encontrada");
         }
@@ -96,19 +102,19 @@ public class MedicoController {
                     
                     
                     if (medicoActualizado.getEps() != null && medicoActualizado.getEps().getId() != null) {
-                        epsRepository.findById(medicoActualizado.getEps().getId())
+                        epsRepositorio.findById(medicoActualizado.getEps().getId())
                                      .ifPresent(medico::setEps);
                     }
                     
                     
-                    if (medicoActualizado.getIdEspecialidad() != null && medicoActualizado.getIdEspecialidad().getId() != null) {
-                        especialidadRepository.findById(medicoActualizado.getIdEspecialidad().getId())
-                                              .ifPresent(medico::setIdEspecialidad);
+                    if (medicoActualizado.getEspecialidad() != null && medicoActualizado.getEspecialidad().getId() != null) {
+                        especialidadRepository.findById(medicoActualizado.getEspecialidad().getId())
+                                              .ifPresent(medico::setEspecialidad);
                     }
                     
                     
-                    if (medicoActualizado.getIdUsuario() != null && medicoActualizado.getIdUsuario().getId() != null) {
-                        usuarioRepository.findById(medicoActualizado.getIdUsuario().getId())
+                    if (medicoActualizado.getUsuario() != null && medicoActualizado.getUsuario().getId() != null) {
+                        usuarioRepositorio.findById(medicoActualizado.getUsuario().getId())
                                          .ifPresent(medico::setUsuario);
                     }
                     

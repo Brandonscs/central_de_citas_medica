@@ -2,9 +2,11 @@ package com.medicitas.app.modelo;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +38,8 @@ public class Rol {
     @OneToMany(mappedBy = "rol")
     @JsonManagedReference("rol-rolUsuario")
     private List<RolUsuario> rolUsuarios;
+    
+   
     
 	public Rol() {
 		super();
@@ -100,5 +104,6 @@ public class Rol {
 	public void setRolUsuarios(List<RolUsuario> rolUsuarios) {
 		this.rolUsuarios = rolUsuarios;
 	}
+	
 	
 }

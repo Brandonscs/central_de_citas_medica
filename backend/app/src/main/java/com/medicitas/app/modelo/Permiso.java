@@ -1,4 +1,6 @@
-package com.example.demo.modelo;
+//package com.example.demo.modelo;
+
+package com.medicitas.app.modelo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

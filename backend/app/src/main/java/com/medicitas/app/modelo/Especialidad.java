@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 public class Especialidad {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     

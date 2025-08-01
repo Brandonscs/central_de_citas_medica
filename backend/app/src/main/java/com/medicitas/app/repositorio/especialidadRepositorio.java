@@ -10,7 +10,7 @@ import java.util.List;
 public interface especialidadRepositorio extends JpaRepository<Especialidad, Long> {
 
    
-    @Query(value="SELECT e FROM Especialidad e WHERE e.nombre = :nombre", nativeQuery=true)
+    @Query(value="SELECT * FROM Especialidad  WHERE nombre = :nombre", nativeQuery=true)
     Especialidad buscarEspecialidadPorNombre(@RequestParam("nombre") String nombre);
 
     
@@ -23,5 +23,6 @@ public interface especialidadRepositorio extends JpaRepository<Especialidad, Lon
 
     
     @Query(value="SELECT COUNT(m) > 0 FROM Medico m WHERE m.especialidad.id = :especialidadId", nativeQuery=true)
+    
     boolean existsMedicosByEspecialidadId(@RequestParam("especialidadId") Long especialidadId);
 }
