@@ -1,12 +1,17 @@
 package com.medicitas.app.modelo;
 
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -51,15 +56,24 @@ public class Usuario {
     @Column(name = "activo")
     private boolean activo;
 
+    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference("usuario-rol")
+    @JsonIgnore
+    private List<RolUsuario> rolesAsignados;
+
+    @OneToMany(mappedBy = "asignadoPor")
+    @JsonManagedReference("asignador-rol")
+    @JsonIgnore
+    private List<RolUsuario> rolesAsignadosPor;
 
 	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Usuario(String nombreCompleto, String identificacion, String telefono, String direccion, String correo,
-			Date fechaNacimiento, String rh, String password, Date fechaRegistro, boolean activo) {
+			Date fechaNacimiento, String rh, String password, Date fechaRegistro, boolean activo,
+			List<RolUsuario> rolesAsignados, List<RolUsuario> rolesAsignadosPor) {
 		super();
 		this.nombreCompleto = nombreCompleto;
 		this.identificacion = identificacion;
@@ -71,119 +85,113 @@ public class Usuario {
 		this.password = password;
 		this.fechaRegistro = fechaRegistro;
 		this.activo = activo;
+		this.rolesAsignados = rolesAsignados;
+		this.rolesAsignadosPor = rolesAsignadosPor;
 	}
-
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNombreCompleto() {
 		return nombreCompleto;
 	}
 
-
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
 	}
-
 
 	public String getIdentificacion() {
 		return identificacion;
 	}
 
-
 	public void setIdentificacion(String identificacion) {
 		this.identificacion = identificacion;
 	}
-
 
 	public String getTelefono() {
 		return telefono;
 	}
 
-
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
 
 	public String getDireccion() {
 		return direccion;
 	}
 
-
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-
 
 	public String getCorreo() {
 		return correo;
 	}
 
-
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-
 
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-
 
 	public String getRh() {
 		return rh;
 	}
 
-
 	public void setRh(String rh) {
 		this.rh = rh;
 	}
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
 
-
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
-
 
 	public boolean isActivo() {
 		return activo;
 	}
 
-
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-    
-    
-	
 
+	public List<RolUsuario> getRolesAsignados() {
+		return rolesAsignados;
+	}
+
+	public void setRolesAsignados(List<RolUsuario> rolesAsignados) {
+		this.rolesAsignados = rolesAsignados;
+	}
+
+	public List<RolUsuario> getRolesAsignadosPor() {
+		return rolesAsignadosPor;
+	}
+
+	public void setRolesAsignadosPor(List<RolUsuario> rolesAsignadosPor) {
+		this.rolesAsignadosPor = rolesAsignadosPor;
+	}
+
+	
 }

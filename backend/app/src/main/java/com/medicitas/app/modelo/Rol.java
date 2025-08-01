@@ -1,12 +1,16 @@
 package com.medicitas.app.modelo;
 
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -29,6 +33,10 @@ public class Rol {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
 
+    @OneToMany(mappedBy = "rol")
+    @JsonManagedReference("rol-rolUsuario")
+    private List<RolUsuario> rolUsuarios;
+    
 	public Rol() {
 		super();
 		this.fechaCreacion = new Date();
@@ -36,10 +44,11 @@ public class Rol {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Rol(String nombre, String descripcion) {
+	public Rol(String nombre, String descripcion, List<RolUsuario> rolUsuarios) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.rolUsuarios = rolUsuarios;
 		this.fechaCreacion = new Date();
         this.activo = true;
 	}
@@ -82,6 +91,14 @@ public class Rol {
 
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
+	}
+
+	public List<RolUsuario> getRolUsuarios() {
+		return rolUsuarios;
+	}
+
+	public void setRolUsuarios(List<RolUsuario> rolUsuarios) {
+		this.rolUsuarios = rolUsuarios;
 	}
 	
 }

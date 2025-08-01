@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,28 +20,28 @@ import com.medicitas.app.repositorio.UsuarioRepository;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-	@Autowired
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @GetMapping
+    @GetMapping("/listarUsuarios")
     public List<Usuario> obtenerTodosLosUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Usuario obtenerUsuarioPorId(@PathVariable Long id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
+    @GetMapping("/obtenerUsuarioPorId")
+    public Usuario obtenerUsuarioPorId(@RequestParam("idUsuario") Long idUsuario) {
+        Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
         return usuario.orElse(null);
     }
 
-    @PostMapping
+    @PostMapping("/crearUsuario")
     public Usuario crearUsuario(@RequestBody Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    @PutMapping("/{id}")
-    public Usuario actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+    @PutMapping("/actualizarUsuario")
+    public Usuario actualizarUsuario(@RequestParam("idUsuario") Long idUsuario, @RequestBody Usuario usuario) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(idUsuario);
         if (optionalUsuario.isPresent()) {
             Usuario existente = optionalUsuario.get();
             existente.setNombreCompleto(usuario.getNombreCompleto());
@@ -60,27 +59,27 @@ public class UsuarioController {
         return null;
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminarUsuario(@PathVariable Long id) {
-        usuarioRepository.deleteById(id);
+    @DeleteMapping("/eliminarUsuario")
+    public void eliminarUsuario(@RequestParam("idUsuario") Long idUsuario) {
+        usuarioRepository.deleteById(idUsuario);
     }
 
-    @GetMapping("/buscar")
+    @GetMapping("/buscarPorNombre")
     public List<Usuario> buscarUsuarioPorNombre(@RequestParam String nombre) {
         return usuarioRepository.findByNombreCompletoContainingIgnoreCase(nombre);
     }
 
-    @GetMapping("/correo/{correo}")
-    public Usuario buscarUsuarioPorCorreo(@PathVariable String correo) {
+    @GetMapping("/buscarPorCorreo")
+    public Usuario buscarUsuarioPorCorreo(@RequestParam String correo) {
         return usuarioRepository.findByCorreo(correo);
     }
 
-    @GetMapping("/identificacion/{identificacion}")
-    public Usuario buscarUsuarioPorIdentificacion(@PathVariable String identificacion) {
+    @GetMapping("/buscarPorIdentificacion")
+    public Usuario buscarUsuarioPorIdentificacion(@RequestParam String identificacion) {
         return usuarioRepository.findByIdentificacion(identificacion);
     }
 
-    @GetMapping("/activos")
+    @GetMapping("/listarActivos")
     public List<Usuario> buscarUsuariosActivos() {
         return usuarioRepository.buscarUsuariosActivos();
     }
