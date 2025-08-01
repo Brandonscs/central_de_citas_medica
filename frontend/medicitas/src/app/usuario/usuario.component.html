@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Gestión de Usuarios</h2>
+
+  <form (ngSubmit)="crearUsuario()">
+    <input [(ngModel)]\="usuarioSeleccionado.nombreCompleto" name="nombreCompleto" placeholder="Nombre Completo" required />
+    <input [(ngModel)]="usuarioSeleccionado.identificacion" name="identificacion" placeholder="Identificación" required />
+    <input [(ngModel)]="usuarioSeleccionado.correo" name="correo" placeholder="Correo" required />
+    <input [(ngModel)]="usuarioSeleccionado.telefono" name="telefono" placeholder="Teléfono" />
+    <input [(ngModel)]="usuarioSeleccionado.direccion" name="direccion" placeholder="Dirección" />
+    <input [(ngModel)]="usuarioSeleccionado.password" name="password" type="password" placeholder="Contraseña" required />
+    <button type="submit">Guardar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.nombreCompleto }}</td>
+        <td>{{ usuario.correo }}</td>
+        <td>
+          <button (click)="seleccionarUsuario(usuario)">Editar</button>
+          <button (click)="eliminarUsuario(usuario.id!)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
