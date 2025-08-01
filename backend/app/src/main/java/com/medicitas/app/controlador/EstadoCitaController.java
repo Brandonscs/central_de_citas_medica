@@ -50,16 +50,14 @@ public class EstadoCitaController {
     }
 
     @PutMapping("/actualizar")
-    public Optional<EstadoCita> actualizar(@RequestParam("idEstado") Long idEstado,
-                                           @RequestParam("nombre") String nombre,
-                                           @RequestParam("descripcion") String descripcion) {
+    public Optional<EstadoCita> actualizar(@RequestBody EstadoCita estadoCitaP) {
 
-        Optional<EstadoCita> estadoCitaOp = this.estadoCitaRepository.findById(idEstado);
+        Optional<EstadoCita> estadoCitaOp = this.estadoCitaRepository.findById(estadoCitaP.getId());
 
         if (estadoCitaOp.isPresent()) {
             EstadoCita estadoCita = estadoCitaOp.get();
-            estadoCita.setNombre(nombre);
-            estadoCita.setDescripcion(descripcion);
+            estadoCita.setNombre(estadoCitaP.getNombre());
+            estadoCita.setDescripcion(estadoCitaP.getDescripcion());
 
             this.estadoCitaRepository.save(estadoCita);
 
