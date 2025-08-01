@@ -3,6 +3,7 @@ package com.medicitas.app.repositorio;
 import com.medicitas.app.modelo.Especialidad;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface especialidadRepositorio extends JpaRepository<Especialidad, Lon
 
    
     @Query(value="SELECT * FROM Especialidad  WHERE nombre = :nombre", nativeQuery=true)
-    Especialidad buscarEspecialidadPorNombre(@RequestParam("nombre") String nombre);
+    Especialidad buscarEspecialidadPorNombre(@Param("nombre") String nombre);
 
     
 

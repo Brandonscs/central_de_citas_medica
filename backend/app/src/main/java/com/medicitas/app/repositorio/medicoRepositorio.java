@@ -25,5 +25,5 @@ public interface medicoRepositorio extends JpaRepository<Medico, Long> {
     @Query(value = "select * from Medico WHERE activo = true", nativeQuery=true)
     List<Medico> buscarMedicosActivos();
     
-    boolean existsByEspecialidadId(@RequestParam ("especialidadId") Long especialidadId);
+    boolean existsByEspecialidadId(@Param ("especialidadId") Long especialidadId);
 }
