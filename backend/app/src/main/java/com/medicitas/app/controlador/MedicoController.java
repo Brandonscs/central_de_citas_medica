@@ -42,28 +42,28 @@ public class MedicoController {
     @PostMapping("/crearMedico")
     public ResponseEntity<?> crearMedico(@RequestBody Medico medicoRequest) {
         
-        if (medicoRequest.getIdUsuario() == null || medicoRequest.getIdUsuario().getId() == null) {
+        if (medicoRequest.getUsuario() == null || medicoRequest.getUsuario().getId() == null) {
             return ResponseEntity.badRequest().body("El ID de usuario es requerido");
         }
-        Optional<Usuario> usuarioOp = usuarioRepositorio.findById(medicoRequest.getIdUsuario().getId());
+        Optional<Usuario> usuarioOp = usuarioRepositorio.findById(medicoRequest.getUsuario().getId());
         if (!usuarioOp.isPresent()) {
             return ResponseEntity.badRequest().body("Usuario no encontrado");
         }
 
         
-        if (medicoRequest.getIdEps() == null || medicoRequest.getIdEps().getId() == null) {
+        if (medicoRequest.getEps() == null || medicoRequest.getEps().getId() == null) {
             return ResponseEntity.badRequest().body("El ID de EPS es requerido");
         }
-        Optional<EPS> epsOp = epsRepository.findById(medicoRequest.getIdEps().getId());
+        Optional<EPS> epsOp = epsRepository.findById(medicoRequest.getEps().getId());
         if (!epsOp.isPresent()) {
             return ResponseEntity.badRequest().body("EPS no encontrada");
         }
 
         
-        if (medicoRequest.getIdEspecialidad() == null || medicoRequest.getIdEspecialidad().getId() == null) {
+        if (medicoRequest.getEspecialidad() == null || medicoRequest.getEspecialidad().getId() == null) {
             return ResponseEntity.badRequest().body("El ID de especialidad es requerido");
         }
-        Optional<Especialidad> especialidadOp = especialidadRepository.findById(medicoRequest.getIdEspecialidad().getId());
+        Optional<Especialidad> especialidadOp = especialidadRepository.findById(medicoRequest.getEspecialidad().getId());
         if (!especialidadOp.isPresent()) {
             return ResponseEntity.badRequest().body("Especialidad no encontrada");
         }
@@ -102,7 +102,7 @@ public class MedicoController {
                     
                     
                     if (medicoActualizado.getIdEspecialidad() != null && medicoActualizado.getIdEspecialidad().getId() != null) {
-                        especialidadRepositorio.findById(medicoActualizado.getIdEspecialidad().getId())
+                        especialidadRepository.findById(medicoActualizado.getIdEspecialidad().getId())
                                               .ifPresent(medico::setIdEspecialidad);
                     }
                     
