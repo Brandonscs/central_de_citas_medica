@@ -1,4 +1,6 @@
-package com.example.demo.controlador;
+//package com.example.demo.controlador;
+
+package com.medicitas.app.controlador;
 
 import java.util.List;
 
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.modelo.Permiso;
-import com.example.demo.repositorio.PermisoRepository;
+//import com.example.demo.modelo.Permiso;
+import com.medicitas.app.modelo.Permiso;
+
+import com.medicitas.app.repositorio.PermisoRepository;
 
 @RestController
 @RequestMapping("/permiso")

@@ -1,4 +1,6 @@
-package com.example.demo.modelo;
+//package com.example.demo.modelo;
+
+package com.medicitas.app.modelo;
 
 import java.sql.Date;
 
@@ -7,6 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,11 +23,13 @@ public class RolPermiso {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "idRol")
-	private Long idRol;
+	@ManyToOne
+	@JoinColumn(name = "idRol", referencedColumnName = "id")
+	private Rol idRol;
 	
-	@Column(name = "idPermiso")
-	private Long idPermiso;
+	@ManyToOne
+	@JoinColumn(name = "idPermiso", referencedColumnName = "id")
+	private Permiso idPermiso;
 	
 	@Column(name = "fechaAsignacion")
 	private Date fechaAsignacion;
@@ -36,7 +44,7 @@ public class RolPermiso {
 	}
 
 	
-	public RolPermiso(Long idRol, Long idPermiso) {
+	public RolPermiso(Rol idRol, Permiso idPermiso) {
 		super();
 		this.idRol = idRol;
 		this.idPermiso = idPermiso;
@@ -53,22 +61,22 @@ public class RolPermiso {
 	}
 
 
-	public Long getIdRol() {
+	public Rol getIdRol() {
 		return idRol;
 	}
 
 
-	public void setIdRol(Long idRol) {
+	public void setIdRol(Rol idRol) {
 		this.idRol = idRol;
 	}
 
 
-	public Long getIdPermiso() {
+	public Permiso getIdPermiso() {
 		return idPermiso;
 	}
 
 
-	public void setIdPermiso(Long idPermiso) {
+	public void setIdPermiso(Permiso idPermiso) {
 		this.idPermiso = idPermiso;
 	}
 

@@ -1,4 +1,8 @@
-package com.example.demo.controlador;
+//package com.medicitas.app.controlador;
+
+package com.medicitas.app.controlador;
+import com.medicitas.app.repositorio.RolPermisoRepository;
+import com.medicitas.app.modelo.RolPermiso;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.modelo.RolPermiso;
-import com.example.demo.repositorio.RolPermisoRepository;
+//import com.example.demo.modelo.RolPermiso;
+//import com.example.demo.repositorio.RolPermisoRepository;
 
 @RestController
 @RequestMapping("/rol-permiso")
