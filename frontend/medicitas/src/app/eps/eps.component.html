@@ -1,1 +1,49 @@
-<p>eps works!</p>
+<h2>Gestión de EPS</h2>
+
+<form (ngSubmit)="guardar()">
+  <input [(ngModel)]="nuevaEPS.nombre" name="nombre" placeholder="Nombre" required />
+  <input [(ngModel)]="nuevaEPS.nit" name="nit" placeholder="NIT" required />
+  <input [(ngModel)]="nuevaEPS.telefono" name="telefono" placeholder="Teléfono" />
+  <input [(ngModel)]="nuevaEPS.direccion" name="direccion" placeholder="Dirección" />
+  <input [(ngModel)]="nuevaEPS.email" name="email" placeholder="Email" />
+  <button type="submit">{{ modoEdicion ? 'Actualizar' : 'Crear' }} EPS</button>
+</form>
+
+<hr />
+
+<button (click)="listar()">Listar todas</button>
+<button (click)="listarActivas()">Listar activas</button>
+<input [(ngModel)]="buscarId" name="buscarId" placeholder="Buscar por ID" />
+<button (click)="buscarPorId()">Buscar</button>
+<input [(ngModel)]="buscarNit" name="buscarNit" placeholder="Buscar por NIT" />
+<button (click)="buscarPorNit()">Buscar</button>
+
+<hr />
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>NIT</th>
+    <th>Teléfono</th>
+    <th>Dirección</th>
+    <th>Email</th>
+    <th>Fecha</th>
+    <th>Activo</th>
+    <th>Acciones</th>
+  </tr>
+  <tr *ngFor="let eps of epsList">
+    <td>{{ eps.id }}</td>
+    <td>{{ eps.nombre }}</td>
+    <td>{{ eps.nit }}</td>
+    <td>{{ eps.telefono }}</td>
+    <td>{{ eps.direccion }}</td>
+    <td>{{ eps.email }}</td>
+    <td>{{ eps.fechaCreacion | date: 'short' }}</td>
+    <td>{{ eps.activo ? 'Sí' : 'No' }}</td>
+    <td>
+      <button (click)="cargarParaEditar(eps)">Editar</button>
+      <button (click)="eliminar(eps.id!)">Eliminar</button>
+    </td>
+  </tr>
+</table>
