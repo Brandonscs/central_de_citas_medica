@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medicitas.app.modelo.RolUsuario;
@@ -22,12 +22,12 @@ public class RolUsuarioController {
 	@Autowired
     private RolUsuarioRepository rolUsuarioRepository;
 
-    @GetMapping
+    @GetMapping("/listarRolUsuario")
     public List<RolUsuario> obtenerTodos() {
         return rolUsuarioRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/asignarRol")
     public RolUsuario asignarRol(@RequestBody RolUsuario rolUsuario) {
         if (rolUsuario.getFechaAsignacion() == null) {
             rolUsuario.setFechaAsignacion(new Date());
@@ -35,18 +35,18 @@ public class RolUsuarioController {
         return rolUsuarioRepository.save(rolUsuario);
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminarRolDeUsuario(@PathVariable Long id) {
-        rolUsuarioRepository.deleteById(id);
+    @DeleteMapping("/eliminarRolUsuario")
+    public void eliminarRolDeUsuario(@RequestParam("idRolUsuario") Long idRolUsuario) {
+        rolUsuarioRepository.deleteById(idRolUsuario);
     }
 
-    @GetMapping("/usuario/{idUsuario}")
-    public List<RolUsuario> buscarPorUsuario(@PathVariable Long idUsuario) {
+    @GetMapping("/buscarPorUsuario")
+    public List<RolUsuario> buscarPorUsuario(@RequestParam("idUsuario") Long idUsuario) {
         return rolUsuarioRepository.buscarRolesPorUsuario(idUsuario);
     }
 
-    @GetMapping("/rol/{idRol}")
-    public List<RolUsuario> buscarPorRol(@PathVariable Long idRol) {
+    @GetMapping("/buscarPorRol")
+    public List<RolUsuario> buscarPorRol(@RequestParam("idRol") Long idRol) {
         return rolUsuarioRepository.buscarUsuariosPorRol(idRol);
     }
 }

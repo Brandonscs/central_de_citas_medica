@@ -1,0 +1,46 @@
+<h2>Asignaciones de Rol a Usuario</h2>
+
+<form (ngSubmit)="asignar()">
+  <label>Usuario ID:</label>
+  <input [(ngModel)]="nuevaAsignacion.usuario.id" name="usuarioId" required>
+  <label>Rol ID:</label>
+  <input [(ngModel)]="nuevaAsignacion.rol.id" name="rolId" required>
+  <label>Asignado Por ID:</label>
+  <input [(ngModel)]="nuevaAsignacion.asignadoPor.id" name="asignadoPorId" required>
+  <button type="submit">Asignar Rol</button>
+</form>
+
+<hr>
+
+<div>
+  <label>Buscar por Usuario ID:</label>
+  <input [(ngModel)]="idBuscarUsuario">
+  <button (click)="buscarPorUsuario()">Buscar</button>
+
+  <label>Buscar por Rol ID:</label>
+  <input [(ngModel)]="idBuscarRol">
+  <button (click)="buscarPorRol()">Buscar</button>
+
+  <button (click)="listar()">Mostrar Todos</button>
+</div>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Usuario ID</th>
+    <th>Rol ID</th>
+    <th>Asignado Por</th>
+    <th>Fecha</th>
+    <th>Activo</th>
+    <th>Acciones</th>
+  </tr>
+  <tr *ngFor="let item of asignaciones">
+    <td>{{ item.id }}</td>
+    <td>{{ item.usuario?.id }}</td>
+    <td>{{ item.rol?.id }}</td>
+    <td>{{ item.asignadoPor?.id }}</td>
+    <td>{{ item.fechaAsignacion | date:'short' }}</td>
+    <td>{{ item.activo }}</td>
+    <td><button (click)="eliminar(item.id)">Eliminar</button></td>
+  </tr>
+</table>

@@ -1,0 +1,17 @@
+<h2>Auditorías</h2>
+
+<ul>
+  <li *ngFor="let aud of auditorias">
+    <strong>{{ aud.tablaAfectada }}</strong> - {{ aud.accion }} - {{ aud.fechaAccion | date:'short' }}
+  </li>
+</ul>
+
+<h3>Crear nueva auditoría</h3>
+<form (ngSubmit)="crearAuditoria()">
+  <label>Tabla: <input [(ngModel)]="nuevaAuditoria.tablaAfectada" name="tabla" required></label><br>
+  <label>Acción: <input [(ngModel)]="nuevaAuditoria.accion" name="accion" required></label><br>
+  <label>ID Registro: <input [(ngModel)]="nuevaAuditoria.idRegistro" name="idRegistro" type="number" required></label><br>
+  <label>Datos Anteriores: <textarea [(ngModel)]="nuevaAuditoria.datosAnteriores" name="datosAnteriores"></textarea></label><br>
+  <label>Datos Nuevos: <textarea [(ngModel)]="nuevaAuditoria.datosNuevos" name="datosNuevos"></textarea></label><br>
+  <button type="submit">Guardar</button>
+</form>

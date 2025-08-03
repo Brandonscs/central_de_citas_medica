@@ -1,0 +1,7 @@
+<div *ngIf="visible" class="modal">
+  <div class="modal-contenido" [ngClass]="tipo">
+    <h2>{{ titulo }}</h2>
+    <p>{{ detalle }}</p>
+    <button (click)="cerrar()">Cerrar</button>
+  </div>
+</div>
