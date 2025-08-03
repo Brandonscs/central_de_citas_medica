@@ -1,0 +1,33 @@
+/* Estilo general del navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #004080;
+  padding: 0.5rem 1rem;
+}
+
+.nav-left {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-btn {
+  background-color: #66a3ff;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: salmon;
+}
+
+.user-role {
+  color: white;
+  font-weight: bold;
+}

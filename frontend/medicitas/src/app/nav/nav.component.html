@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <button class="nav-btn" *ngIf="paciente" (click)="verCitasPaciente()">Ver citas</button>
+    <button class="nav-btn" *ngIf="paciente" (click)="solicitarCita()">Solicitar cita</button>
+
+    <button class="nav-btn" *ngIf="medico" (click)="verCitasPendientes()">Ver citas pendientes</button>
+    <button class="nav-btn" *ngIf="medico" (click)="verTodasLasCitas()">Ver todas las citas</button>
+
+    <button class="nav-btn" *ngIf="auxiliar" (click)="verCitasDia()">Ver citas del día</button>
+    <button class="nav-btn" *ngIf="auxiliar" (click)="citasPorMedico()">Citas por médico</button>
+    <button class="nav-btn" *ngIf="auxiliar" (click)="asignarCita()">Asignar cita</button>
+  </div>
+
+  <div class="nav-right">
+    <span class="user-role">Rol: {{rol}}</span>
+  </div>
+</nav>
+
+
